@@ -1,0 +1,48 @@
+{
+  "app": {
+    "navbar": {
+      "home": "หน้าหลัก",
+      "contact": "รายชื่อ",
+      "setting": "ตั้งค่า"
+    }
+  },
+  "home": {
+    "location": "ตำแหน่ง",
+    "call": "โทรออก",
+    "mail": "ส่งอีเมล",
+    "line": "เข้าไลน์",
+    "dialog": {
+      "select_image": "เลือกแหล่งที่มาของภาพ",
+      "gallery": "แกลเลอรี",
+      "camera": "กล้องถ่ายรูป"
+    }
+  },
+  "contact": {
+    "contact_list_title": "รายชื่อผู้ติดต่อ",
+    "search_by_name": "ค้นหาตามชื่อ",
+    "no_contacts_available": "ไม่มีรายชื่อผู้ติดต่อ",
+    "no_matching_contacts_found": "ไม่พบรายชื่อที่ตรงกัน",
+    "age": "อายุ",
+    "of": "จาก",
+    "contact_dialog": {
+      "create_contact": "สร้างผู้ติดต่อ",
+      "first_name": "ชื่อจริง",
+      "last_name": "นามสกุล",
+      "age": "อายุ",
+      "cancel": "ยกเลิก",
+      "save": "บันทึก",
+      "please_enter_first_name": "กรุณากรอกชื่อจริง",
+      "please_enter_last_name": "กรุณากรอกนามสกุล",
+      "please_enter_age": "กรุณากรอกอายุ",
+      "only_letters_allowed": "อนุญาตให้ใช้แค่ตัวอักษรและช่องว่าง",
+      "please_enter_valid_number": "กรุณากรอกหมายเลขที่ถูกต้อง",
+      "contact_limit_reached": "ถึงขีดจำกัดของผู้ติดต่อแล้ว!",
+      "contact_added_successfully": "เพิ่มผู้ติดต่อสำเร็จ!"
+    }
+  },
+  "setting": {
+    "setting": "การตั้งค่า",
+    "lang": "ภาษา",
+    "notification": "การแจ้งเตือน"
+  }
+}
