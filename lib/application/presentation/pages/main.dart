@@ -35,16 +35,9 @@ class _MainPageState extends State<MainPage> {
           children: [
             IndexedStack(
               index: _selectedIndex,
-              children: const [
-                RoutePages.home,
-                RoutePages.contact,
-                RoutePages.setting,
-              ],
+              children: const [RoutePages.home, RoutePages.contact, RoutePages.setting],
             ),
-            NavbarApp(
-              selectedIndex: _selectedIndex,
-              onTabSelected: _onTabSelected,
-            ),
+            NavbarApp(selectedIndex: _selectedIndex, onTabSelected: _onTabSelected),
           ],
         ),
       ),

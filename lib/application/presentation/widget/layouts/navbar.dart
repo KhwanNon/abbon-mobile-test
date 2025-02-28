@@ -1,3 +1,5 @@
+import 'package:abbon_mobile_test/application/presentation/shared/theme/color.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -5,11 +7,7 @@ class NavbarApp extends StatelessWidget {
   final int selectedIndex;
   final ValueChanged<int> onTabSelected;
 
-  const NavbarApp({
-    super.key,
-    required this.selectedIndex,
-    required this.onTabSelected,
-  });
+  const NavbarApp({super.key, required this.selectedIndex, required this.onTabSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -35,21 +33,18 @@ class NavbarApp extends StatelessWidget {
           selectedIndex: selectedIndex,
           onDestinationSelected: onTabSelected,
           destinations: [
-            _buildNavItem(CupertinoIcons.home, "Home", 0),
-            _buildNavItem(CupertinoIcons.phone, "Contact", 1),
-            _buildNavItem(CupertinoIcons.settings, "Settings", 2),
+            _buildNavItem(CupertinoIcons.home, "app.navbar.home".tr(), 0, ColorThemeApp.primary),
+            _buildNavItem(CupertinoIcons.phone, "app.navbar.contact".tr(), 1, Colors.green),
+            _buildNavItem(CupertinoIcons.settings, "app.navbar.setting".tr(), 2, Colors.blueGrey),
           ],
         ),
       ),
     );
   }
 
-  NavigationDestination _buildNavItem(IconData icon, String label, int index) {
+  NavigationDestination _buildNavItem(IconData icon, String label, int index, Color iconColor) {
     return NavigationDestination(
-      icon: Icon(
-        icon,
-        color: selectedIndex == index ? Colors.blueAccent : Colors.grey,
-      ),
+      icon: Icon(icon, color: selectedIndex == index ? iconColor : Colors.grey),
       label: label,
     );
   }

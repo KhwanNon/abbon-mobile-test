@@ -1,6 +1,48 @@
 {
-  "app": {},
-  "home": {},
-  "contact": {},
-  "setting": {}
+  "app": {
+    "navbar": {
+      "home": "Home",
+      "contact": "Contact",
+      "setting": "Setting"
+    }
+  },
+  "home": {
+    "location": "Location",
+    "call": "Call",
+    "mail": "Mail",
+    "line": "Line",
+    "dialog": {
+      "select_image": "Select Image Source",
+      "gallery": "Gallery",
+      "camera": "Camera"
+    }
+  },
+  "contact": {
+    "contact_list_title": "Contact List",
+    "search_by_name": "Search by Name",
+    "no_contacts_available": "No contacts available",
+    "no_matching_contacts_found": "No matching contacts found",
+    "age": "Age",
+    "of": "of",
+    "contact_dialog": {
+      "create_contact": "Create Contact",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "cancel": "Cancel",
+      "save": "Save",
+      "please_enter_first_name": "Please enter first name",
+      "please_enter_last_name": "Please enter last name",
+      "please_enter_age": "Please enter age",
+      "only_letters_allowed": "Only letters and spaces are allowed",
+      "please_enter_valid_number": "Please enter a valid number",
+      "age": "Age",
+      "contact_limit_reached": "Contact limit reached!",
+      "contact_added_successfully": "Contact added successfully!"
+    }
+  },
+  "setting": {
+    "setting": "Setting",
+    "lang": "Language",
+    "notification": "Notification"
+  }
 }

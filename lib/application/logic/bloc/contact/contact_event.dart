@@ -17,8 +17,6 @@ class OnSearch extends ContactEvent {
   OnSearch({required this.text});
 }
 
-class OnClearTextSearch extends ContactEvent {}
-
 class OnNextPage extends ContactEvent {}
 
 class OnPrevPage extends ContactEvent {}

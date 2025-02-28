@@ -1,56 +1,90 @@
+import 'package:abbon_mobile_test/application/presentation/shared/extension/fade_dialog.dart';
+import 'package:abbon_mobile_test/application/presentation/shared/navigator_helper.dart';
+import 'package:abbon_mobile_test/application/presentation/widget/components/alert_dialog.dart';
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:faker/faker.dart';
+import 'package:flutter/material.dart';
 
 part 'contact_event.dart';
 part 'contact_state.dart';
 
 class ContactBloc extends Bloc<ContactEvent, ContactState> {
   ContactBloc() : super(ContactState.initial()) {
-    on<OnRandomContact>((event, emit) async {
-      final faker = Faker(); // Create an instance of Faker
-      List<Person> contacts = [];
+    on<OnRandomContact>(_onRandomContact);
+    on<OnNextPage>(_onNextPage);
+    on<OnPrevPage>(_onPrevPage);
+    on<OnDeleteContact>(_onDeleteContact);
+    on<OnSearch>(_onSearch);
+    on<OnAddContact>(_onAddContact);
+  }
 
-      for (int i = 0; i < 100; i++) {
-        String fname = faker.person.firstName();
-        String lname = faker.person.lastName();
-        int age = faker.randomGenerator.integer(
-          80,
-          min: 18,
-        ); // Random age between 18 and 80
-        contacts.add(Person(fname: fname, lname: lname, age: age));
-      }
-
-      emit(state.copyWith(contactList: contacts));
+  Future<void> _onRandomContact(OnRandomContact event, Emitter<ContactState> emit) async {
+    final faker = Faker();
+    final List<Person> contacts = List.generate(100, (_) {
+      final fname = faker.person.firstName();
+      final lname = faker.person.lastName();
+      final age = faker.randomGenerator.integer(80, min: 18);
+      return Person(fname: fname, lname: lname, age: age);
     });
+    emit(state.copyWith(contactList: contacts));
+  }
 
-    on<OnNextPage>((event, emit) async {
-      emit(state.copyWith(page: state.page + 1));
-    });
+  void _onNextPage(OnNextPage event, Emitter<ContactState> emit) {
+    emit(state.copyWith(page: state.page + 1));
+  }
 
-    on<OnPrevPage>((event, emit) async {
-      emit(state.copyWith(page: state.page - 1));
-    });
+  void _onPrevPage(OnPrevPage event, Emitter<ContactState> emit) {
+    emit(state.copyWith(page: state.page - 1));
+  }
 
-    on<OnDeleteContact>((event, emit) async {
-      if (state.contactList != null &&
-          event.index >= 0 &&
-          event.index < state.contactList!.length) {
-        // copy data
-        final updatedList = List<Person>.from(state.contactList!);
+  Future<void> _onDeleteContact(OnDeleteContact event, Emitter<ContactState> emit) async {
+    if (_isValidIndex(event.index)) {
+      final updatedList = List<Person>.from(state.contactList!);
+      updatedList.removeAt(event.index);
+      emit(state.copyWith(contactList: updatedList));
+    }
+  }
 
-        updatedList.removeAt(event.index);
+  void _onSearch(OnSearch event, Emitter<ContactState> emit) {
+    final searchText = event.text.trim();
+    if (searchText.length >= 3) {
+      emit(state.copyWith(textSearxh: searchText));
+    } else {
+      emit(state.copyWith(clearTextSearch: true));
+    }
+  }
 
-        emit(state.copyWith(contactList: updatedList));
-      }
-    });
+  Future<void> _onAddContact(OnAddContact event, Emitter<ContactState> emit) async {
+    if ((state.contactList?.length ?? 0) == 100) {
+      _showContactLimitReachedDialog();
+    } else {
+      await _showContactAddedDialog();
+      final updatedList = [event.person, ...(state.contactList ?? <Person>[])];
+      emit(state.copyWith(contactList: updatedList));
+      Navigator.pop(NavigatorHelper.currContext!);
+    }
+  }
 
-    on<OnSearch>((event, emit) async {
-      final searchText = event.text.trim();
-      if (searchText.length >= 3) {
-        emit(state.copyWith(textSearxh: searchText));
-      } else {
-        emit(state.copyWith(clearTextSearch: true));
-      }
-    });
+  bool _isValidIndex(int index) {
+    return state.contactList != null && index >= 0 && index < state.contactList!.length;
+  }
+
+  void _showContactLimitReachedDialog() {
+    _showDialog(AlertType.fail, 'contact.contact_dialog.contact_limit_reached'.tr());
+  }
+
+  Future<void> _showContactAddedDialog() async {
+    await _showDialog(AlertType.success, 'contact.contact_dialog.contact_added_successfully'.tr());
+  }
+
+  Future<void> _showDialog(AlertType type, String message) async {
+    await showDialog(
+      context: NavigatorHelper.currContext!,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return FadeTransitionDialog(child: AlertDialogComponent(type: type, message: message));
+      },
+    );
   }
 }
