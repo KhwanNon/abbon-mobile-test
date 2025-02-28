@@ -53,6 +53,10 @@
 	<string>We need your location to open the map at your current position.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need your location to open the map at your current position.</string>
-
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>nb</string>
+	</array>
 </dict>
 </plist>

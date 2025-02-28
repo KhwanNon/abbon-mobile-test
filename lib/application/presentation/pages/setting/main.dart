@@ -18,9 +18,9 @@ class SettingPage extends StatelessWidget {
           ListTile(
             onTap: () {
               if (currentLocale.languageCode == "th") {
-                context.setLocale(Locale('en', 'US'));
+                EasyLocalization.of(context)?.setLocale(Locale('en', 'US'));
               } else {
-                context.setLocale(Locale('th', 'TH'));
+                EasyLocalization.of(context)?.setLocale(Locale('th', 'TH'));
               }
             },
             leading: Text(

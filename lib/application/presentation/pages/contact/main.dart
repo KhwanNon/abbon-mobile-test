@@ -111,7 +111,12 @@ class _ContactPageState extends State<ContactPage> {
     final int page = state.page;
 
     if (contactList == null || contactList.isEmpty) {
-      return Center(child: Text('contact.no_contacts_available'.tr()));
+      return Center(
+        child: Text(
+          'contact.no_contacts_available'.tr(),
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      );
     }
 
     final filteredList =
@@ -131,7 +136,12 @@ class _ContactPageState extends State<ContactPage> {
             : (startIndex + itemsPerPage);
 
     if (filteredContactNum == 0 || startIndex >= filteredContactNum) {
-      return Center(child: Text('contact.no_matching_contacts_found'.tr()));
+      return Center(
+        child: Text(
+          'contact.no_matching_contacts_found'.tr(),
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      );
     }
 
     return ListView.builder(
@@ -141,8 +151,14 @@ class _ContactPageState extends State<ContactPage> {
         final person = filteredList[actualIndex];
         return ListTile(
           contentPadding: const EdgeInsets.only(left: 15),
-          title: Text("${person.fname} ${person.lname}"),
-          subtitle: Text('${'contact.age'.tr()}: ${person.age}'),
+          title: Text(
+            "${person.fname} ${person.lname}",
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          subtitle: Text(
+            '${'contact.age'.tr()}: ${person.age}',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
           trailing: IconButton(
             icon: const Icon(CupertinoIcons.delete, size: 18),
             onPressed: () {

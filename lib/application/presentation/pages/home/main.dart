@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:abbon_mobile_test/application/presentation/pages/home/components/dialog_Image_source.dart';
 import 'package:abbon_mobile_test/application/presentation/shared/extension/fade_dialog.dart';
@@ -33,7 +35,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
-    );
+    ).then((_) => FocusScope.of(context).requestFocus(FocusNode()));
   }
 
   // Pick Image from the selected source (Camera/Gallery)
@@ -45,34 +47,6 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
-
-  // Menu List Data
-  final List<Map<String, dynamic>> menu = [
-    {
-      "name": "Location",
-      "text": "home.location".tr(),
-      "icon": CupertinoIcons.location,
-      "color": Colors.blue,
-    },
-    {
-      "name": "Call",
-      "text": "home.call".tr(),
-      "icon": CupertinoIcons.phone,
-      "color": Colors.blueGrey,
-    },
-    {
-      "name": "Mail",
-      "text": "home.mail".tr(),
-      "icon": CupertinoIcons.mail,
-      "color": Colors.redAccent,
-    },
-    {
-      "name": "Line",
-      "text": "home.line".tr(),
-      "icon": CupertinoIcons.chat_bubble,
-      "color": Colors.green,
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -123,6 +97,23 @@ class _HomePageState extends State<HomePage> {
 
   // Menu Grid Section
   Widget _buildMenuGrid() {
+    // Menu List Data
+    final List<Map<String, dynamic>> menu = [
+      {
+        "name": "Location",
+        "text": "home.location",
+        "icon": CupertinoIcons.location,
+        "color": Colors.blue,
+      },
+      {"name": "Call", "text": "home.call", "icon": CupertinoIcons.phone, "color": Colors.blueGrey},
+      {"name": "Mail", "text": "home.mail", "icon": CupertinoIcons.mail, "color": Colors.redAccent},
+      {
+        "name": "Line",
+        "text": "home.line",
+        "icon": CupertinoIcons.chat_bubble,
+        "color": Colors.green,
+      },
+    ];
     return Expanded(
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
@@ -154,7 +145,7 @@ class _HomePageState extends State<HomePage> {
         ),
         const SizedBox(height: 10),
         Text(
-          menuItem["text"].toString(),
+          menuItem["text"].toString().tr(),
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodySmall,
         ),
